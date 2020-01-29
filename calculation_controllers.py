@@ -70,7 +70,7 @@ modules_controller = {'MS-IOM2721-0': {'AI':8, 'BI':0, 'AO':2, 'BO':0, 'CO':0, '
         }
 # task from operator
 
-SIGNAL_TASK = [40,11,5,7]
+SIGNAL_TASK = [10,11,5,7]
 
 print(index_max_SIGNAL_TASK(SIGNAL_TASK))
 
@@ -110,17 +110,19 @@ for i in range(1,8): # how many modules you can use
 dict_by_price = {}
 max_label = 0
 test_list_signals = []
+test_list_price = []
 # finish dictionary we filteres by signals from Task to reduce elements.
 
+counter_1 = 0
 for i in rezult_by_signals:
     if rezult_by_signals[i][1] >= max_label:
+        counter_1 +=1
         max_label = rezult_by_signals[i][1]
-        dict_by_price.update({rezult_by_signals[i][0]: rezult_by_signals[i][2]})
+        dict_by_price.update({counter_1: rezult_by_signals[i][2]})
         #print(rezult_by_signals[i][1])
         test_list_signals.append(rezult_by_signals[i][1])
 
-print(test_list_signals)
-print(test_list_signals.index(max(test_list_signals)))
-for key in dict_by_price:
-    print("Price is {} Combination is {}" .format(key, dict_by_price[key]))
+index_in_sort_dictionary = test_list_signals.index(max(test_list_signals)) + 1       
+
+print(dict_by_price[index_in_sort_dictionary])
 
