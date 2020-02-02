@@ -108,52 +108,74 @@ modules_controller = {'MS-IOM3721-0': {'AI':0, 'BI':16, 'AO':0, 'BO':0, 'UI':0, 
                     'MS-IOM3711-2': {'AI':4, 'BI':0, 'AO':0, 'BO':4, 'UI':0, 'CO':4, 'price':154}             
                    
         }
+
+
 # task from operator accordint next order AI BI AO BO UI CO
 INPUT_OPERATOR = [21,26,36,48,0,0]
+next_step = False
+finish_spisok_controller_modules = []
 
-control_list = []
 
-# save to list signals of the controller
+while next_step != True:
+    
+    control_list = []
 
-for value in controller.values():
-    for key in value.values():
-        control_list.append(key)       
 
-print(control_list)
+    # save to list signals of the controller
 
-# calculate amount of signals in the SIGNAL_TASK for next steps of programme
+    for value in controller.values():
+        for key in value.values():
+            control_list.append(key)       
 
-SIGNAL_TASK = list(map(operator.sub, INPUT_OPERATOR, control_list))
+    print(control_list)
 
-print(SIGNAL_TASK)
+    # calculate amount of signals in the SIGNAL_TASK for next steps of programme
 
-# calculate max of index in SIGNAL_TASK
+    SIGNAL_TASK = list(map(operator.sub, INPUT_OPERATOR, control_list))
 
-cal_type_max_signal_task = index_max_SIGNAL_TASK(SIGNAL_TASK)
+    print(SIGNAL_TASK)
+    
+    # calculate max of index in SIGNAL_TASK
 
-# calculate type of signal according max of index in SIGNAL_TASK
+    cal_type_max_signal_task = index_max_SIGNAL_TASK(SIGNAL_TASK)
 
-type_of_signal = str(switch_type(cal_type_max_signal_task))
+    # calculate type of signal according max of index in SIGNAL_TASK
 
-print(type_of_signal)
+    type_of_signal = str(switch_type(cal_type_max_signal_task))
 
-# combination for controller JC, 8 - max count of the modules connection to controller
-spisok = modefideModulesController(modules_controller, type_of_signal)
-#print(spisok)
+    print('calculate type of signals {}'.format(type_of_signal))
 
-# how many modules you have to use
-rezult_by_signals = modules_calculate(spisok)
+    # combination for controller JC, 8 - max count of the modules connection to controller
+    spisok = modefideModulesController(modules_controller, type_of_signal)
+    #print(spisok)
 
-# finish dictionary we filteres by signals from Task to reduce elements.
+    # how many modules you have to use
+    rezult_by_signals = modules_calculate(spisok)
 
-rezult_1step = filterModulesSpisok(rezult_by_signals)
+    # finish dictionary we filteres by signals from Task to reduce elements.
 
-list_rezult = []
+    rezult_1step = filterModulesSpisok(rezult_by_signals)
 
-for i in range(0,6):
-    summa_sig = calcBackVolume_signals(rezult_1step, switch_type(i))
-    list_rezult.append(summa_sig)
+    list_rezult = []
 
-SIGNAL_TASK = list(map(operator.sub, SIGNAL_TASK, list_rezult))
+    for i in range(0,6):
+        summa_sig = calcBackVolume_signals(rezult_1step, switch_type(i))
+        list_rezult.append(summa_sig)
 
-print(SIGNAL_TASK)
+    SIGNAL_TASK = list(map(operator.sub, SIGNAL_TASK, list_rezult))
+
+    print('rezult SIGNAL TASK before next iteration {}'.format(SIGNAL_TASK))
+
+    next_step = all([False if x > 0 else  True for x in SIGNAL_TASK])
+
+    print('out condition TRUE/FALSE before next step {}'.format(next_step))
+
+    INPUT_OPERATOR = SIGNAL_TASK
+
+    finish_spisok_controller_modules.append(controller.keys())
+    finish_spisok_controller_modules.append(rezult_1step)
+
+
+else:
+    print('finish calculation')
+    print(finish_spisok_controller_modules)
