@@ -1,0 +1,1 @@
+pyuic5 calculate.ui -o win_calculate.py
