@@ -1,10 +1,9 @@
 
-finish_spisok_controller_modules = []
+perevod=[-14, -6, -6, -3, -1, -4]
 
-controller = {'MS-FAC3611-0': {'AI':8, 'BI':6, 'AO':6, 'BO':6, 'UI':0, 'CO':0}}
-
-finish_spisok_controller_modules.append(controller.keys())
-
-print(finish_spisok_controller_modules)
-
-print(finish_spisok_controller_modules[0])
+signal_max = max(perevod)
+print(signal_max)
+if (max(perevod) > 0): 
+    print('YES')
+else:
+    print('NO')

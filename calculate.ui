@@ -6,27 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>488</height>
+    <width>661</width>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>60</x>
      <y>10</y>
      <width>181</width>
      <height>31</height>
@@ -62,17 +52,17 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>410</y>
-     <width>93</width>
-     <height>28</height>
+     <x>90</x>
+     <y>230</y>
+     <width>121</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
     <string>Рассчитать</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QTextBrowser" name="textBrowser_outputrezult">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -81,6 +71,43 @@
      <height>301</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>AI  BI  AO  BO  UI  CO</string>
+   </property>
+  </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>240</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QSpinBox" name="spinBox_AI"/>
+   <widget class="QSpinBox" name="spinBox_BI"/>
+   <widget class="QSpinBox" name="spinBox_AO"/>
+   <widget class="QSpinBox" name="spinBox_BO"/>
+   <widget class="QSpinBox" name="spinBox_UI"/>
+   <widget class="QSpinBox" name="spinBox_CO"/>
   </widget>
  </widget>
  <resources/>
