@@ -166,6 +166,7 @@ def calclulator (input_from_operator):
             print('out condition TRUE/FALSE before next step {}'.format(next_step))
 
             INPUT_OPERATOR = SIGNAL_TASK
+            finish_spisok_controller_modules.append(list(controller.keys()))
             finish_spisok_controller_modules.append(rezult_1step)
 
         else:
