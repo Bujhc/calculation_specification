@@ -77,7 +77,7 @@ def filterModulesSpisok (rezult_by_signals):
     list_signals = []
 
     # finish dictionary we filteres by signals from Task to reduce elements.
-
+    print(rezult_by_signals)
     counter_1 = 0
     for i in rezult_by_signals:
         if rezult_by_signals[i][1] >= max_label:
@@ -88,9 +88,10 @@ def filterModulesSpisok (rezult_by_signals):
             list_signals.append(rezult_by_signals[i][1])
     
     if len(list_signals) > 1:
+        
         index_in_sort_dictionary = list_signals.index(max(list_signals)) + 1
     else:
-        index_in_sort_dictionary = list_signals.index(max(list_signals))
+        index_in_sort_dictionary = 1
 
 
     # finish list of modules after 1 step calculation
@@ -150,7 +151,7 @@ def calclulator (input_from_operator):
             # finish dictionary we filteres by signals from Task to reduce elements.
 
             rezult_1step = filterModulesSpisok(rezult_by_signals)
-
+            print( 'количество модулей после первой итерации {}'.format(len(rezult_1step)))
             list_rezult = []
 
             for i in range(0,6):
@@ -166,14 +167,15 @@ def calclulator (input_from_operator):
             print('out condition TRUE/FALSE before next step {}'.format(next_step))
 
             INPUT_OPERATOR = SIGNAL_TASK
-            finish_spisok_controller_modules.append(list(controller.keys()))
-            finish_spisok_controller_modules.append(rezult_1step)
-
+            if len(rezult_1step) >= 8:
+                finish_spisok_controller_modules.append(list(controller.keys()))
+                
+            else:
+                finish_spisok_controller_modules.append(rezult_1step)
+        
         else:
             finish_spisok_controller_modules.append(list(controller.keys()))
             next_step = all([False if (x > 0) and (x != 0) else  True for x in SIGNAL_TASK]) 
-        
-
 
     else:
         print('finish calculation')
